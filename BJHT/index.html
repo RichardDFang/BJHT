@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-Type" content="text/html;charset=utf-8">
+	<title>账户管理</title>
+	<link rel="stylesheet" type="text/css" href="css/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="css/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1464415178_7823637.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<div id="head">
+	<h1>账户管理</h1>
+	<p>Mark Otto</p>	
+</div>
+<div id="left-bar">
+	<div id="all">
+		<a href="#allContent" class="active">
+			<i class="iconfont">&#xe602</i>
+			<div>全部</div>
+		</a>
+	</div>
+	<div id="new">
+		<a href="#newContent">
+			<i class="iconfont">&#xe604</i>
+			<div>新增</div>
+		</a>
+	</div>
+	<div id="search">
+		<a href="#searchContent">
+			<i class="iconfont">&#xe601</i>
+			<div>查询</div>
+		</a>
+	</div>
+</div>
+<div id="container">
+	<!--全部账户-->
+	<div id="allContent">
+		<ol class="breadcrumb">
+		  	<li><a href="index.html">首页</a></li>
+		  	<li class="active">全部账户</li>
+		</ol>
+		<div class="guest">
+			<button class="btn btn-default" id="delete">全部删除</button>
+			<table id="table" class="display" cellspacing="0" width="100%">
+		        <thead>
+		            <tr>
+		            	<th><input type="checkbox" id="checkAll"></input></th>
+		                <th>编码</th>
+		                <th>名称</th>
+		                <th>备注</th>
+		                <th>状态</th>
+		                <th>创建时间</th>
+		                <th>最后登录时间</th>
+		                <th>账号类型</th>
+		                <th>操作</th>
+		            </tr>
+		        </thead>
+		    </table>
+	    </div>
+    </div>
+
+    <!--新建账户-->
+    <div id="newContent">
+    	<ol class="breadcrumb">
+		  	<li><a href="index.html">首页</a></li>
+		  	<li class="active">新建账户</li>
+		</ol>
+		<div class="guest">
+			<form class="form-horizontal" role="form">
+			   	<div class="form-group">
+			      	<label for="name" class="col-sm-2 control-label">名称</label>
+			      	<div class="col-sm-10">
+			         	<input type="text" class="form-control" id="name" placeholder="请输入名字">
+			      	</div>
+			   	</div>
+			   	<div class="form-group">
+			      	<label for="type" class="col-sm-2 control-label">账号类型</label>
+			      	<div class="col-sm-10">
+			         	<select class="single-select form-control">
+					        <option>企业</option>
+					        <option>个人</option>
+					        <option>金融机构</option>
+					   	</select>
+			      	</div>
+			   	</div>
+			   	<div class="form-group">
+			      	<label for="remark" class="col-sm-2 control-label">备注</label>
+			      	<div class="col-sm-10">
+			         	<input type="text" class="form-control" id="remark" placeholder="请输入备注">
+			      	</div>
+			   	</div>
+			   	<div class="form-group">
+			   		<label for="btn" class="col-sm-2 control-label"></label>
+			      	<div class="col-sm-offset-2 col-sm-10">
+			         	<button type="submit" class="btn btn-default" id="submitBtn">提交</button>
+			      	</div>
+			   	</div>
+			</form>
+		</div>
+    </div>
+
+    <!--查询账户-->
+    <div id="searchContent">
+    	<ol class="breadcrumb">
+		  	<li><a href="index.html">首页</a></li>
+		  	<li class="active">查询账户</li>
+		</ol>
+		<div class="guest">
+			<form class="form-horizontal" role="form">
+			   	<div class="form-group">
+			      	<label for="id" class="col-sm-2 control-label">编码</label>
+			      	<div class="col-sm-10">
+			         	<input type="text" class="form-control" id="id">
+			      	</div>
+			   	</div>
+			   	<div class="form-group">
+			      	<label for="name" class="col-sm-2 control-label">名称</label>
+			      	<div class="col-sm-10">
+			         	<input type="text" class="form-control" id="name" placeholder="请输入账户名称">
+			      	</div>
+			   	</div>
+			   	<div class="form-group">
+			      	<label for="type" class="col-sm-2 control-label">注册类型</label>
+			      	<div class="col-sm-10">
+			         	<select class="single-select form-control">
+					        <option>企业</option>
+					        <option>个人</option>
+					        <option>金融机构</option>
+					   	</select>
+			      	</div>
+			   	</div>
+			   	<div class="form-group">
+			   		<label for="date" class="col-sm-2 control-label">注册日期(范围)</label>
+			      	<div class="col-sm-10">
+                        <input class="form-control" type="text" name="datefilter" value="" id="daterange">
+                    </div>
+			   	</div>
+			   	<div class="row">
+			   		<label for="search" class="col-sm-2 control-label"></label>
+					<div class="col-sm-10">
+					    <div class="input-group">
+					     	<input type="text" class="form-control" placeholder="查询...">
+					      	<span class="input-group-btn">
+					        	<button class="btn btn-default" type="button">搜索</button>
+					      	</span>
+					    </div>
+					</div>
+				</div>
+			</form>
+		</div>
+    </div>
+
+    <!--修改账户-->
+    <div id="changeContent" style="display: none;">
+    	<ol class="breadcrumb">
+		  	<li><a href="index.html">首页</a></li>
+		  	<li class="active">修改账户</li>
+		</ol>
+		<div class="guest">
+			<form class="form-horizontal" role="form">
+			   	<div class="form-group">
+			      	<label for="name" class="col-sm-2 control-label">名称</label>
+			      	<div class="col-sm-10">
+			         	<input type="text" class="form-control" id="name">
+			      	</div>
+			   	</div>
+			   	<div class="form-group">
+			      	<label for="type" class="col-sm-2 control-label">账号类型</label>
+			      	<div class="col-sm-10">
+			         	<select class="single-select form-control">
+					        <option>企业</option>
+					        <option>个人</option>
+					        <option>金融机构</option>
+					   	</select>
+			      	</div>
+			   	</div>
+			   	<div class="form-group">
+			   		<label for="state" class="col-sm-2 control-label">状态</label>
+			   		<label class="checkbox-inline">
+				      	<input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" checked>草稿
+				   	</label>
+				   	<label class="checkbox-inline">
+				      	<input type="radio" name="optionsRadiosinline" id="optionsRadios4" value="option2"> 生效
+				   	</label>
+				   	<label class="checkbox-inline">
+				      	<input type="radio" name="optionsRadiosinline" id="optionsRadios4" value="option2"> 待注销
+				   	</label>
+				   	<label class="checkbox-inline">
+				      	<input type="radio" name="optionsRadiosinline" id="optionsRadios4" value="option2"> 已注销
+				   	</label>
+			   	</div>
+			   	<div class="form-group">
+			      	<label for="remark" class="col-sm-2 control-label">备注</label>
+			      	<div class="col-sm-10">
+			         	<input type="text" class="form-control" id="remark" placeholder="请输入备注">
+			      	</div>
+			   	</div>
+			   	<div class="form-group">
+			   		<label for="btn" class="col-sm-2 control-label"></label>
+			      	<div class="col-sm-offset-2 col-sm-10">
+			         	<button type="submit" class="btn btn-default" id="submitBtn">提交</button>
+			      	</div>
+			   	</div>
+			</form>
+		</div>
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/moment.min.js"></script>
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/select2.min.js"></script>
+<script type="text/javascript" src="js/daterangepicker.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var tab = $("#left-bar div a");
+	tab.each(function() {
+		$($(this).attr("href")).hide();
+		if($(this).hasClass('active')) {
+			$($(this).attr("href")).show();
+		}
+		$(this).click(function(event) {
+			event.preventDefault();
+			$("#changeContent").hide();
+			if(!$(this).hasClass('active')) {
+				tab.each(function() {
+					$(this).removeClass('active');
+					$($(this).attr("href")).hide();
+				});
+				$(this).addClass("active");  
+                $($(this).attr("href")).show(); 
+			}
+		} );
+	} );
+
+	$('#daterange').daterangepicker({
+		autoUpdateInput: false,
+        locale: {
+            cancelLabel: 'Clear'
+        }
+	});
+
+	$('#daterange').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+    });
+
+    $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+    });
+
+	$(".single-select").select2({
+		width: "100%"
+	});
+
+	$.extend( $.fn.dataTable.defaults, {
+	    searching: false
+	} );
+    $('#table').DataTable( {
+    	 "dom": 'rtip',
+    	columnDefs:[{
+            orderable:false,
+            targets:[0,0]
+        }],
+        "processing": true,
+        "pagingType": "full_numbers",
+        "ajax": "data/objects_deep.txt",
+        "columns": [
+        	{ "data": "check" },
+            { "data": "id" },
+            { "data": "name" },
+            { "data": "remark" },
+            { "data": "state" },
+            { "data": "created_date" },
+            { "data": "last_login_time" },
+            { "data": "type" },
+            { "data": "operation" }
+        ],
+        language: {
+	        "sProcessing": "处理中...",
+	        "sLengthMenu": "显示 _MENU_ 项结果",
+	        "sZeroRecords": "没有匹配结果",
+	        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+	        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+	        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+	        "sInfoPostFix": "",
+	        "sSearch": "搜索:",
+	        "sUrl": "",
+	        "sEmptyTable": "表中数据为空",
+	        "sLoadingRecords": "载入中...",
+	        "sInfoThousands": ",",
+	        "oPaginate": {
+	            "sFirst": "首页",
+	            "sPrevious": "上页",
+	            "sNext": "下页",
+	            "sLast": "末页"
+	        },
+	        "oAria": {
+	            "sSortAscending": ": 以升序排列此列",
+	            "sSortDescending": ": 以降序排列此列"
+	        }
+	    }
+    } );
+
+    $('#table tbody').on( 'click', 'tr td .change', function (event) {
+    	event.preventDefault();
+		tab.each(function() {
+			$(this).removeClass('active');
+			$($(this).attr("href")).hide();
+		});
+		$($(this).attr('href')).show();
+    })
+
+    $("#checkAll").on("click", function () {
+        if ($(this).prop("checked") === true) {
+            $("input[name='checkList']").prop("checked", $(this).prop("checked"));
+        } else {
+            $("input[name='checkList']").prop("checked", false);
+        }
+    } );
+    $("#delete").click(function(event) {
+    	var check = $("input[name='checkList']");
+    	var boolCheck = 0;
+    	check.each(function() {
+    		if($(this).prop("checked") === true) {
+    			boolCheck = 1;
+    			return;
+    		}
+    	});
+    	if(boolCheck === 0)
+    		alert("请选中一个你要删除的账户");
+    });
+} );
+</script>
+</body>
+</html>
